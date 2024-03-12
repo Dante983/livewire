@@ -2,18 +2,33 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 
 class Clicker extends Component
 {
-    public function handleClick()
+    public $name;
+    public $email;
+    public $password;
+
+    public function createNewUser()
     {
-        dump('clicker');
+        User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password
+        ]);
     }
 
 
     public function render()
     {
-        return view('livewire.clicker');
+        $title = "Test";
+        $users = User::all();
+
+        return view('livewire.clicker', [
+            'title' => $title,
+            'users' => $users
+        ]);
     }
 }
